@@ -1,0 +1,32 @@
+{
+  "name": "uswan3.v2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"gulp dev\" \"lite-server\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "concurrently": "^3.1.0",
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^6.2.0",
+    "gulp-pug": "^3.1.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-webpack": "^1.5.0",
+    "lite-server": "^2.2.2",
+    "postcss-cssnext": "^2.8.0",
+    "riotjs-loader": "^3.0.0",
+    "webpack": "^1.13.2"
+  },
+  "dependencies": {
+    "riot": "^2.6.4",
+    "superagent": "^2.3.0"
+  }
+}
