@@ -33,6 +33,7 @@ gulp.task('pug', () => {
 
 gulp.task('watch', () => {
 	gulp.watch('./src/sass/**/*.sass', ['sass']);
+	gulp.watch('./src/pug/**/*.jade', ['pug']);
 });
 
-gulp.task('dev', ['watch', 'webpack', 'sass']);
+gulp.task('dev', ['watch', 'webpack', 'sass', 'pug']);
