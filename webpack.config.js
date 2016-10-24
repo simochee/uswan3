@@ -24,7 +24,11 @@ module.exports = {
 			{
 				test: /\.js$|\.tag/,
 				exclude: /node_modules/,
-				loader: 'babel-loader'
+				loader: 'babel-loader',
+				query: {
+					presets: ["es2015"],
+					cacheDirectory: true
+				}
 			}
 		]
 	},
@@ -36,5 +40,6 @@ module.exports = {
 		new webpack.ProvidePlugin({
 			riot: 'riot'
 		})
-	]
+	],
+	devtool: 'inline-source-map'
 }
