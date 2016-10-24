@@ -9,6 +9,8 @@ home
 
 		menu-list(year="{year}" month="{month}")
 
+		footer-nav
+
 		credit
 
 	menu-popup

@@ -2,10 +2,13 @@ var webpack = require('webpack');
 
 module.exports = {
 	watch: true,
-	entry: './src/scripts/entry.js',
+	entry: {
+		'main': './src/scripts/main.js',
+		'editor': './src/scripts/editor.js'
+	},
 	output: {
 		path: __dirname + '/docs/scripts',
-		filename: 'bundle.js',
+		filename: '[name].bundle.js',
 		publicPath: '/docs/'
 	},
 	module: {
