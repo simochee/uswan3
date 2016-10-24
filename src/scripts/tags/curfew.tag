@@ -1,49 +1,84 @@
 curfew
-	.curfew(if="{isSP}")#curfew 門限を確認しましたか？
-		.header
-			.left
-				span.ion-ios-arrow-back.icon
-				| 左スワイプ：確認
-			.right
-				| 右スワイプ：設定
-				span.ion-ios-arrow-forward.icon
+	.curfew(if="{isShow}")#curfew 門限を確認しましたか？
 		.footer
 			.center
-				span.ion-ios-circle-filled.icon
+				span.ion-ios-circle-outline.icon
 				| タップ：再表示
-
+				br
+				span.ion-ios-circle-filled.icon
+				| ダブルタップ：確認
 
 	script.
-		var lockr = require('lockr');
+		var Lockr = require('lockr');
+		var anime = require('animejs');
+		var utils = require('../utils');
+		var d = new Date;
+		var now = {
+			year: d.getFullYear(),
+			month: d.getMonth() + 1,
+			date: d.getDate(),
+			formated: function() {
+				return this.year + '-' + utils.zero(this.month) + '-' + utils.zero(this.date)
+			}
+		}
+		var self = this;
 
 		if('ontouchstart' in window) {
-			this.isSP = true;
+			var checked = Lockr.get('curfew');
+			if(checked === now.formated()) {
+				self.isShow = false;
+			} else {
+				self.isShow = true;
+			}
 		} else {
-			this.isSP = false;
+			self.isShow = false;
 		}
 
 		this.on('mount', function() {
-			if(this.isSP) {
+			if(this.isShow) {
 				var $elem = document.getElementById('curfew');
-				var startPos;
+				// FirstClickの判定フラグ
+				var clicked = false;
+				// $elemのクリックイベント
 				$elem.addEventListener('touchstart', function(e) {
-					var touchObj = e.changedTouches[0];
-					var pos = {
-						x: touchObj.pageX,
-						y: touchObj.pageY
-					}
-					startPos = pos;
-				});
-				$elem.addEventListener('touchmove', function(e) {
-					var touchObj = e.changedTouches[0];
-					var pos = {
-						x: touchObj.pageX,
-						y: touchObj.pageY
-					}
-					
-				});
-				$elem.addEventListener('touchend', function(e) {
+					e.preventDefault();
 
+					// フラグが立っていたらDblclick
+					if(clicked) {
+						clicked = false;
+						Lockr.set('curfew', now.formated());
+						anime({
+							targets: $elem,
+							delay: 300,
+							duration: 500,
+							easing: 'easeOutCirc',
+							scale: 0.6,
+							opacity: 0,
+							complete: function() {
+								$elem.style.display = 'none';
+							}
+						});
+						return;
+					}
+
+					// フラグを登録
+					clicked = true;
+					// 時間経過後でフラグが立ったままならSglclick
+					setTimeout(function() {
+						if(clicked) {
+							anime({
+								targets: $elem,
+								duration: 500,
+								easing: 'easeOutCirc',
+								scale: 1.4,
+								opacity: 0,
+								complete: function() {
+									$elem.style.display = 'none';
+								}
+							});
+						}
+						clicked = false;
+					}, 300);
 				});
 			}				
 		});

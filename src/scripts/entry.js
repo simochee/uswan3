@@ -8,6 +8,7 @@ router.start();
 
 const api = require('./api');
 const d = new Date;
+
 obs.on('getMenu:req', (year = d.getFullYear(), month = d.getMonth() + 1) => {
 	api.get(2016, 10).then((data) => {
 		if(data.status === 'success') {

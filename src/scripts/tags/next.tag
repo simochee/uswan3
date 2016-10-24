@@ -109,6 +109,7 @@ next
 	style(type="sass" scoped).
 		.next-menu
 			position: relative
+			overflow: hidden
 			margin: 10px 3px 20px
 			border: 1px solid  #aaa
 			background: #fff

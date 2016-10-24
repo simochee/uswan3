@@ -29,6 +29,7 @@
     "webpack": "^1.13.2"
   },
   "dependencies": {
+    "animejs": "^1.1.1",
     "async": "^2.1.2",
     "jade": "^1.11.0",
     "lockr": "^0.8.4",

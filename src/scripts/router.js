@@ -7,6 +7,9 @@ require('./tags/menu-list');
 riot.route('/', () => {
 	require('./tags/next');
 	require('./tags/curfew');
+	
+	obs.trigger('getMenu:req');
+
 	riot.mount('route', 'home');
 });
 

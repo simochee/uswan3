@@ -6,13 +6,7 @@ home
 	btn-icon(icons="{['fork', 'knife']}" text="今日の献立" scroller="{scrollerOpts}")
 
 	menu-list(year="{year}" month="{month}")
-
-	div(style="height: 3000px; width: 10px; background: #fee")
-
-	div#today Target
-
-	div(style="height: 3000px; width: 10px; background: #fee")
-
+	
 	credit
 
 	script.
@@ -27,11 +21,6 @@ home
 			duration: 1000,
 			offset: -300
 		}
-
-		obs.trigger('getMenu:req')
-		obs.on('getMenu:res', function(data) {
-			self.menu = data;
-		});
 
 	style(type="sass" scoped).
 		.btn
