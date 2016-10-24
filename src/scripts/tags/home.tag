@@ -1,13 +1,17 @@
 home
-	navbar
 
-	next
+	#blur
+		navbar
 
-	btn-icon(icons="{['fork', 'knife']}" text="今日の献立" scroller="{scrollerOpts}")
+		next
 
-	menu-list(year="{year}" month="{month}")
-	
-	credit
+		btn-icon(icons="{['fork', 'knife']}" text="今日の献立" scroller="{scrollerOpts}")
+
+		menu-list(year="{year}" month="{month}")
+
+		credit
+
+	menu-popup
 
 	script.
 		var self = this;

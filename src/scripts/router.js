@@ -3,6 +3,7 @@ require('./tags/common/navbar');
 require('./tags/common/credit');
 require('./tags/common/utils');
 require('./tags/menu-list');
+require('./tags/menu-popup');
 
 riot.route('/', () => {
 	require('./tags/next');

@@ -10,7 +10,7 @@ next
 		//- ロード後の処理
 		div(if="{!loading}")
 			//- データを取得できたとき
-			ol.menu-list(if="{menu.state == 'OK'}")
+			ol.menu-list(if="{menu.status == 'OK'}")
 				li.main(if="{timeId != 3}")
 					| {menu.main[0]}
 					span(if="{menu.main[1]}")  / {menu.main[1]}
@@ -18,11 +18,11 @@ next
 				li.main.dinnerB(if="{timeId == 3}") {menu.main[1]}
 				li.side(each="{item in menu.sides}") {item}
 			//- 特殊なイベントの日だった場合
-			.event(if="{menu.state == 'event'}")
+			.event(if="{menu.status == 'event'}")
 				p.title {menu.main[0]}
 				p.text(if="{menu.main[1]}") {menu.main[1]}
 			//- 見つからなかった場合の表示
-			.notfound(if="{menu.state == 'notfound' || !menu.state}")
+			.notfound(if="{menu.status == 'notfound' || !menu.status}")
 				i.ion-coffee.icon
 				p.text 献立を取得できませんでした
 
@@ -47,6 +47,7 @@ next
 
 		var getItem = function(data, timeId) {
 			var today = getToday(data);
+			console.log(timeId)
 			if(today === 'notfound') {
 				return today;
 			} else {
@@ -70,7 +71,14 @@ next
 						return {
 							state: 'OK',
 							main: today.d_main.split(','),
-							sides: today.l_side.split(',')
+							sides: today.d_side.split(',')
+						}
+					default:
+						// 次の日の朝食（調整中）
+						return {
+							status: 'OK',
+							main: today.m_main.split(','),
+							sides: today.m_side.split(',')
 						}
 				}
 			}
@@ -102,6 +110,7 @@ next
 			} else {
 				self.menu = getItem(data, time.id);
 			}
+			console.log(self.menu)
 			self.loading = false;
 			riot.update();
 		});
